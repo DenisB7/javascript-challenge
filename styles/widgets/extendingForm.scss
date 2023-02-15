@@ -1,0 +1,12 @@
+form[kjs-type=extendingForm] {
+
+  [kjs-role=extension] {
+    margin: 5px 0;
+    width: 100%;
+    padding: 12px;
+    background-color: $lt-blue;
+    display: none;
+
+    &.reveal { display: block; }
+  }
+}

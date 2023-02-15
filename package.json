@@ -1,0 +1,33 @@
+{
+  "name": "javascript-challenge",
+  "version": "0.0.0",
+  "main": "javascript-challenge.js",
+  "description": "A javascript challenge",
+  "author": "Gust <devs@gust.com>",
+  "contributors": [
+    {
+      "name": "Kara Bernert",
+      "email": "kara@gust.com"
+    }
+  ],
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=v14.17.3"
+  },
+  "scripts": {
+    "build": "npm run build:js && npm run build:scss",
+    "build:js": "browserify javascripts/main.js -o javascript-challenge.js -t [ babelify --presets [ @babel/preset-env ] ]",
+    "build:scss": "node-sass --include-path styles styles/_.scss javascript-challenge.css",
+    "watch:js": "nodemon -e js -i javascript-challenge.js -x 'npm run build:js'",
+    "watch:scss": "nodemon -e scss -x 'npm run build:scss'",
+    "watch": "nodemon -e js,scss -i javascript-challenge.js -x 'npm run build'"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
+    "node-sass": "^8.0.0",
+    "nodemon": "^2.0.2"
+  }
+}
