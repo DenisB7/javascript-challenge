@@ -84,3 +84,8 @@ form[kjs-type=extendingForm] [kjs-role=extension] {
     display: none; }
   [kjs-type=tabs] [kjs-role=content] img {
     width: 100%; }
+
+.field_set {
+  border-color: #00B7BD;
+  border-style: solid;
+}
