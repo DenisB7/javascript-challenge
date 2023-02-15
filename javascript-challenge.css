@@ -89,3 +89,7 @@ form[kjs-type=extendingForm] [kjs-role=extension] {
   border-color: #00B7BD;
   border-style: solid;
 }
+
+[kjs-role=checkit] {
+  margin-left: 20px;
+}
