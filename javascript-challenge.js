@@ -143,8 +143,8 @@ module.exports = tabs;
 "use strict";
 
 function linkedCheckboxes(widget) {
-  const toggleCheckboxes = document.querySelector('[kjs-role=togglecheckboxes]');
-  const checks = document.querySelectorAll('[kjs-role=checks]');
+  const toggleCheckboxes = widget.querySelector('[kjs-role=togglecheckboxes]');
+  const checks = widget.querySelectorAll('[kjs-role=checks]');
 
   toggleCheckboxes.addEventListener('click', changeAllCheckboxes);
 
