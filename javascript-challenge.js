@@ -144,22 +144,25 @@ module.exports = tabs;
 
 function linkedCheckboxes(widget) {
   const toggleCheckboxes = widget.querySelector('[kjs-role=togglecheckboxes]');
-  const checks = widget.querySelectorAll('[kjs-role=checks]');
+  const checkboxes = widget.querySelectorAll('[kjs-role=checkboxes]');
 
   function handleClick(e) {
+    let checkedChildCount, childCheckbox, setCheckbox;
     var checkId = e.target.getAttribute('kjs-checkbox-id');
     //var toggleCheckboxesId = e.target.getAttribute('kjs-togglecheckboxes-id');
-    if (checkId) {
-      let checkedCount = 0;
-      for (const check of checks) {
-        if (check.checked) {
-          checkedCount++;
-        }
+    childCheckbox = false;
+    checkedChildCount = 0;
+    for (const checkbox of checkboxes) {
+      if (checkbox.checked) {
+        checkedChildCount++;
+        childCheckbox = checkbox.checked;
       }
-      if (checkedCount === 0) {
+    }
+    if (checkId) {
+      if (checkedChildCount === 0) {
         toggleCheckboxes.checked = false;
         toggleCheckboxes.indeterminate = false;
-      } else if (checkedCount === checks.length) {
+      } else if (checkedChildCount === checkboxes.length) {
         toggleCheckboxes.checked = true;
         toggleCheckboxes.indeterminate = false;
       } else {
@@ -167,29 +170,23 @@ function linkedCheckboxes(widget) {
         toggleCheckboxes.indeterminate = true;
       }
     } else {
-      let checkbox = false;
-      let setCheckbox = false;
-      for (const check of checks) {
-        if (check.checked) {
-          checkbox = check.checked;
-        }
-      }
-      if (!toggleCheckboxes.checked || checkbox) {
+      setCheckbox = false;
+      if (!toggleCheckboxes.checked || childCheckbox) {
         setCheckbox = false;
         toggleCheckboxes.checked = false;
       }
       else if (toggleCheckboxes.checked) {
         setCheckbox = true;
       }
-      for (const check of checks) {
+      for (const check of checkboxes) {
         check.checked = setCheckbox;
       }
     }
   }
   var actions = [];
-  [...checks, toggleCheckboxes].forEach(function (check) {
+  [...checkboxes, toggleCheckboxes].forEach(function (checkbox) {
     actions.push({
-      element: check,
+      element: checkbox,
       event: 'click',
       handler: handleClick
     });
