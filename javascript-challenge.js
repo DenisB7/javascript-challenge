@@ -187,18 +187,13 @@ function linkedCheckboxes(widget) {
     }
   }
   var actions = [];
-  checks.forEach(function (check) {
+  [...checks, toggleCheckboxes].forEach(function (check) {
     actions.push({
       element: check,
       event: 'click',
       handler: handleClick
     });
   });
-  actions.push({
-    element: toggleCheckboxes,
-    event: 'click',
-    handler: handleClick
-  })
   return {
     actions: actions
   };
