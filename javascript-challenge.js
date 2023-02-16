@@ -33,16 +33,18 @@ var _k = _interopRequireDefault(require("./k"));
 var _drawers = _interopRequireDefault(require("./widgets/drawers"));
 var _extendingForm = _interopRequireDefault(require("./widgets/extending-form"));
 var _tabs = _interopRequireDefault(require("./widgets/tabs"));
+var _linkedCheckboxes = _interopRequireDefault(require("./widgets/linked-checkboxes"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 document.addEventListener("DOMContentLoaded", function () {
   (0, _k["default"])({
     drawers: _drawers["default"],
     extendingForm: _extendingForm["default"],
-    tabs: _tabs["default"]
+    tabs: _tabs["default"],
+    linkedCheckboxes: _linkedCheckboxes["default"],
   }, document);
 });
 
-},{"./k":1,"./widgets/drawers":3,"./widgets/extending-form":4,"./widgets/tabs":5}],3:[function(require,module,exports){
+},{"./k":1,"./widgets/drawers":3,"./widgets/extending-form":4,"./widgets/tabs":5, "./widgets/linked-checkboxes":6}],3:[function(require,module,exports){
 "use strict";
 
 function accordion(widget) {
