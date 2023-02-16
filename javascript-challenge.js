@@ -148,10 +148,6 @@ function linkedCheckboxes(widget) {
 
   toggleCheckboxes.addEventListener('click', changeAllCheckboxes);
 
-  for (const check of checks) {
-    check.addEventListener('click', changeCheckbox);
-  }
-
   function changeAllCheckboxes() {
     let checkbox, setCheckbox;
     for (const check of checks) {
@@ -171,7 +167,7 @@ function linkedCheckboxes(widget) {
     }
   }
 
-  function changeCheckbox() {
+  function handleClick() {
     let checkedCount = 0;
     for (const check of checks) {
       if (check.checked) {
@@ -189,6 +185,17 @@ function linkedCheckboxes(widget) {
       toggleCheckboxes.indeterminate = true;
     }
   }
+  var actions = [];
+  checks.forEach(function (check) {
+    actions.push({
+      element: check,
+      event: 'click',
+      handler: handleClick
+    });
+  });
+  return {
+    actions: actions
+  };
 }
 module.exports = linkedCheckboxes;
 
