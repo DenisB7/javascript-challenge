@@ -143,48 +143,48 @@ module.exports = tabs;
 "use strict";
 
 function linkedCheckboxes(widget) {
-  const toggleCheckboxes = widget.querySelector('[kjs-role=togglecheckboxes]');
-  const checkboxes = widget.querySelectorAll('[kjs-role=checkboxes]');
+  const controllingCheckbox = widget.querySelector('[kjs-role=controllingcheckbox]');
+  const relatedCheckboxes = widget.querySelectorAll('[kjs-role=relatedcheckboxes]');
 
   function handleClick(e) {
-    let checkedChildCount, childCheckbox, setCheckbox;
-    var checkId = e.target.getAttribute('kjs-checkbox-id');
-    //var toggleCheckboxesId = e.target.getAttribute('kjs-togglecheckboxes-id');
-    childCheckbox = false;
-    checkedChildCount = 0;
-    for (const checkbox of checkboxes) {
+    let checkedRelatedCount, uncheckAll, setRelatedBool;
+    let relatedCheckboxId = e.target.getAttribute('kjs-relatedcheckbox-id');
+    let controllingCheckboxId = e.target.getAttribute('kjs-controllingcheckbox-id');
+    uncheckAll = false;
+    checkedRelatedCount = 0;
+    for (const checkbox of relatedCheckboxes) {
       if (checkbox.checked) {
-        checkedChildCount++;
-        childCheckbox = checkbox.checked;
+        checkedRelatedCount++;
+        uncheckAll = checkbox.checked;
       }
     }
-    if (checkId) {
-      if (checkedChildCount === 0) {
-        toggleCheckboxes.checked = false;
-        toggleCheckboxes.indeterminate = false;
-      } else if (checkedChildCount === checkboxes.length) {
-        toggleCheckboxes.checked = true;
-        toggleCheckboxes.indeterminate = false;
+    if (relatedCheckboxId) {
+      if (checkedRelatedCount === 0) {
+        controllingCheckbox.checked = false;
+        controllingCheckbox.indeterminate = false;
+      } else if (checkedRelatedCount === relatedCheckboxes.length) {
+        controllingCheckbox.checked = true;
+        controllingCheckbox.indeterminate = false;
       } else {
-        toggleCheckboxes.checked = false;
-        toggleCheckboxes.indeterminate = true;
+        controllingCheckbox.checked = false;
+        controllingCheckbox.indeterminate = true;
       }
-    } else {
-      setCheckbox = false;
-      if (!toggleCheckboxes.checked || childCheckbox) {
-        setCheckbox = false;
-        toggleCheckboxes.checked = false;
+    } else if (controllingCheckboxId) {
+      setRelatedBool = false;
+      if (!controllingCheckbox.checked || uncheckAll) {
+        setRelatedBool = false;
+        controllingCheckbox.checked = false;
       }
-      else if (toggleCheckboxes.checked) {
-        setCheckbox = true;
+      else if (controllingCheckbox.checked) {
+        setRelatedBool = true;
       }
-      for (const check of checkboxes) {
-        check.checked = setCheckbox;
+      for (const check of relatedCheckboxes) {
+        check.checked = setRelatedBool;
       }
     }
   }
   var actions = [];
-  [...checkboxes, toggleCheckboxes].forEach(function (checkbox) {
+  [...relatedCheckboxes, controllingCheckbox].forEach(function (checkbox) {
     actions.push({
       element: checkbox,
       event: 'click',

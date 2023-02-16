@@ -90,6 +90,6 @@ form[kjs-type=extendingForm] [kjs-role=extension] {
   border-style: solid;
 }
 
-[kjs-role=checkit] {
+[kjs-role=relatedcheckboxes] {
   margin-left: 20px;
 }
