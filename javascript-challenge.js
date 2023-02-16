@@ -137,4 +137,57 @@ function tabs(widget) {
 }
 module.exports = tabs;
 
+},{}],6:[function(require,module,exports){
+"use strict";
+
+function linkedCheckboxes(widget) {
+  const toggleCheckboxes = document.querySelector('[kjs-role=togglecheckboxes]');
+  const checks = document.querySelectorAll('[kjs-role=checks]');
+
+  toggleCheckboxes.addEventListener('click', changeAllCheckboxes);
+
+  for (const check of checks) {
+    check.addEventListener('click', changeCheckbox);
+  }
+
+  function changeAllCheckboxes() {
+    let checkbox, setCheckbox;
+    for (const check of checks) {
+      if (check.checked) {
+        checkbox = check.checked;
+      }
+    }
+    if (!toggleCheckboxes.checked || checkbox) {
+      setCheckbox = false;
+      toggleCheckboxes.checked = false;
+    }
+    else if (toggleCheckboxes.checked) {
+      setCheckbox = true;
+    }
+    for (const check of checks) {
+      check.checked = setCheckbox;
+    }
+  }
+
+  function changeCheckbox() {
+    let checkedCount = 0;
+    for (const check of checks) {
+      if (check.checked) {
+        checkedCount++;
+      }
+    }
+    if (checkedCount === 0) {
+      toggleCheckboxes.checked = false;
+      toggleCheckboxes.indeterminate = false;
+    } else if (checkedCount === checks.length) {
+      toggleCheckboxes.checked = true;
+      toggleCheckboxes.indeterminate = false;
+    } else {
+      toggleCheckboxes.checked = false;
+      toggleCheckboxes.indeterminate = true;
+    }
+  }
+}
+module.exports = linkedCheckboxes;
+
 },{}]},{},[2]);
